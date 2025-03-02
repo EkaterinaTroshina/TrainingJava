@@ -10,9 +10,10 @@ public class Ip {
     int spending = 0;
 
     while (true) {
-      System.out.println("\nВыберите операцию и введите её номер:\n1. Добавить новый доход\n2. Добавить новый расход\n3. Выбрать ситему налогообложения");
+      System.out.println(
+          "\nВыберите операцию и введите её номер:\n1. Добавить новый доход\n2. Добавить новый расход\n3. Выбрать ситему налогообложения");
       String input = scanner.nextLine();
-      if ("end".equals(input)) {
+      if (input.equals("end")) {
         break;
       } else {
         int operation = Integer.parseInt(input);
@@ -30,7 +31,7 @@ public class Ip {
             spending += moneySpan;
             break;
           case 3:
-            getInfo (earnings, spending);
+            getInfo(earnings, spending);
             break;
           default:
             System.out.println("Такой операции нет");
@@ -58,18 +59,17 @@ public class Ip {
     int usnEarnings = taxEarnings(earnings);
     int benefit = Math.abs(usnEarningsMinusSpending - usnEarnings);
     if (usnEarnings < usnEarningsMinusSpending) {
-      System.out.println("\nМы советуем вам УСН доходы\nВаш налог составит: " + usnEarnings
-          + " рублей\nНалог на другой системе: " + usnEarningsMinusSpending + " рублей\nЭкономия: "
-          + benefit + " рублей");
+      System.out.println((String.format(
+          "\nМы советуем вам УСН доходы\nВаш налог составит: %d рублей\nНалог на другой системе: %d рублей\nЭкономия: %d рублей",
+          usnEarnings, usnEarningsMinusSpending, benefit)));
     } else if (usnEarningsMinusSpending < usnEarnings) {
-      System.out.println("\nМы советуем вам УСН доходы минус расходы\nВаш налог составит: "
-          + usnEarningsMinusSpending
-          + " рублей\nНалог на другой системе: " + usnEarnings + " рублей\nЭкономия: "
-          + benefit + " рублей");
+      System.out.println((String.format(
+          "\nМы советуем вам УСН доходы минус расходы\nВаш налог составит: %d рублей\nНалог на другой системе: %d рублей\nЭкономия: %d рублей",
+          usnEarningsMinusSpending, usnEarnings, benefit)));
     } else {
-      System.out.println(
-          "\nСистема не может определиться с выбором. Можете выбрать любую из двух систем: УСН доходы или УСН доходы минус расходы\n Ваш налог в любой из систем составит: "
-              + usnEarnings + " рублей\n");
+      System.out.println((String.format(
+          "\nСистема не может определиться с выбором. Можете выбрать любую из двух систем: УСН доходы или УСН доходы минус расходы\n Ваш налог в любой из систем составит: %d рублей\n",
+          usnEarnings)));
     }
   }
 }
